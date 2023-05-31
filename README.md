@@ -10,8 +10,6 @@
 
 Ingresar al sitio de [play-with-docker](https://www.docker.com/play-with-docker/), para ello deben tener una cuenta en docker, si no la tienen, pueden crearla [aqui](https://hub.docker.com/signup)
 
-[](./img/Instrucciones.mov)
-
 ## Implementación
 
 
