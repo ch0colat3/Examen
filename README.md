@@ -12,5 +12,27 @@ Ingresar al sitio de [play-with-docker](https://www.docker.com/play-with-docker/
 
 ## Implementación
 
+1.- Clonamos el repositorio git
 
+```
+git clone https://github.com/jveraduran/hello-world-container
+```
+
+2.- Ingresamos a la carpeta del proyecto
+
+```
+cd hello-world-container
+```
+
+3.- Compilamos la imagen mediante ```docker build```
+
+```
+docker build -t imagen-custom .
+```
+
+4.- Ejecutamos de manera local el contenedor con ```docker run```
+
+```
+docker run -p 80:80 -t prueba
+```
 
