@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  web:
+    image: php:7.0-apache
+    deploy:
+      replicas: 3
+    ports:
+        - "80:80"
+    volumes:
+        - ./src:/var/www/html
