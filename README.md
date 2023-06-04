@@ -10,7 +10,7 @@
 
 Ingresar al sitio de [play-with-docker](https://www.docker.com/play-with-docker/), para ello deben tener una cuenta en docker, si no la tienen, pueden crearla [aqui](https://hub.docker.com/signup)
 
-## Implementación
+## Implementación Docker
 
 1.- Clonamos el repositorio git
 
@@ -36,3 +36,16 @@ docker build -t imagen-custom .
 docker run -p 80:80 -t prueba
 ```
 
+## Implementación Docker Swarm
+
+1.- Iniciamos Docker Swarm
+
+```
+docker swarm init --advertise-addr 127.0.0.1
+```
+
+2.- Deployamos el Stack de PHP
+
+```
+docker stack deploy -c stack.yml image-custom
+```
