@@ -49,3 +49,33 @@ docker swarm init --advertise-addr 127.0.0.1
 ```
 docker stack deploy -c stack.yml image-custom
 ```
+
+## Implementación Kubernetes
+
+Ingresar al sitio de [play-with-k8s](https://labs.play-with-k8s.com), para ello deben tener una cuenta en GitHub, si no la tienen, pueden crearla [aqui](https://github.com/join)
+
+
+
+1.- Iniciamos nodo maestro cluster
+
+```
+kubeadm init --apiserver-advertise-address $(hostname -i) --pod-network-cidr 10.5.0.0/16
+```
+
+2.- Iniciamos red en el cluster
+
+```
+kubectl apply -f https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/kubeadm-kuberouter.yaml
+```
+
+3.- Parchamos temporalmente el Cluster, para permitir pods en el ControlPlane
+
+```
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+```
+
+4.- Creamos un despliegue de prueba
+
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/nginx-app.yaml
+```
