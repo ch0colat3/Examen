@@ -33,7 +33,7 @@ docker build -t imagen-custom .
 4.- Ejecutamos de manera local el contenedor con ```docker run```
 
 ```
-docker run -p 80:80 -t prueba
+docker run -p 80:80 -t imagen-custom
 ```
 
 ## Implementación Docker Swarm
