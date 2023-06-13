@@ -68,7 +68,7 @@ kubeadm init --apiserver-advertise-address $(hostname -i) --pod-network-cidr 10.
 kubectl apply -f https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/kubeadm-kuberouter.yaml
 ```
 
-3.- Parchamos temporalmente el Cluster, para permitir pods en el ControlPlane
+3.- Parchamos temporalmente el Cluster, para permitir pods en el ControlPlane (Opcional, solo si no se configuran nodos)
 
 ```
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
