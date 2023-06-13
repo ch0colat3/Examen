@@ -33,7 +33,7 @@ docker build -t imagen-custom .
 4.- Ejecutamos de manera local el contenedor con ```docker run```
 
 ```
-docker run -p 80:80 -t imagen-custom
+docker run -p 80:80 -t prueba
 ```
 
 ## Implementación Docker Swarm
@@ -79,3 +79,50 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/nginx-app.yaml
 ```
+
+## Creación de imagen privada
+
+### Autenticándonos en GitHub Container registry
+
+1. Configura tu [access token](https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries), para habilitar funciones de GitHub como OAuth Access token y autenticación para acceder a GitHub API. 
+
+    + Selecciona ```read:packages``` para descargar imágenes de contenedores y leer sus metadatos.
+    
+    + Selecciona ```write:packages``` para descargar y cargar imágenes de contenedores y para leer y escribir sus metadatos
+    
+    + Selecciona ```delete:packages``` para borrar imágenes de contenedores.
+
+2. Graba tu PAT. Te recomiendio almacenar tu PAT acomo una variable de entorno
+   
+    ```
+    export CR_PAT=YOUR_TOKEN
+    ```
+
+3. Usando CLI para tu tipo de contenedor, realizaremos un login en el servico de GitHub Container registry ```ghcr.io```.
+
+    ```
+    $ echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+    > Login Succeeded
+    ```
+
+### Publicando en GitHub Container Registry
+
+Después de iniciar sesión, ahora puedrás etiquetar y enviar tu imagen de Docker hacia GitHub Container Registry
+
+1. Compila la imagen de este repositorio (o la que quieras)
+   
+    ```
+    docker build -t IMAGE_NAME .
+    ```
+
+2. Etiqueta la imagen compilada
+   
+    ```
+    docker tag IMAGE_ID ghcr.io/OWNER/IMAGE_NAME:TAG
+    ```
+
+3. Publica la imagen compilada
+   
+    ```
+    docker push ghcr.io/OWNER/IMAGE_NAME:TAG
+    ```
